@@ -1,0 +1,29 @@
+// inclui biblioteca SoftwareSerial
+#include <SoftwareSerial.h> 
+
+SoftwareSerial mySerial(2,3); // cria uma comunicação serial (rx,tx)
+
+
+byte vel;  // declaração do byte de velocidade do motor
+
+void setup()
+{
+  
+  mySerial.begin(9600); // inicia a serial com o outro arduino
+  
+    Serial.begin(9600); // inicia serial com computador, para fim de acompanhamento
+ 
+}
+
+void loop()
+{
+  
+  vel =  100;// valor da velocidade entre 0 e 255
+  mySerial.write(vel); // envia por serial para o outro arduino
+  Serial.println(vel); // printa na serial do PC
+  
+
+ 
+ 
+
+}
