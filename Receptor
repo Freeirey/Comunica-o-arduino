@@ -1,0 +1,29 @@
+// inclui biblioteca SoftwareSerial
+#include <SoftwareSerial.h>
+SoftwareSerial mySerial(3,2); // define uma comunicação serial (rx,tx)
+// Rx1 --> Tx2   Rx2 --> Tx1
+
+#define motor 5 
+//define pino em que o motor está conectado
+
+
+
+ int vel; //variavel que recebe a velocidade 
+
+
+void setup()
+{
+  pinMode(motor, OUTPUT); // pino do motor definido como saida
+  mySerial.begin(9600);   // inicio da serial entre arduinos
+  Serial.begin(9600);     // inicio da serial com o PC para acompanhamento
+}
+
+void loop()
+{
+ if(mySerial.available()>0){ //se existirem dados chegando no Barramento serial
+   		vel = (mySerial.read()); // o valor enviado pelo outro arduino é salvo em Vel
+    	Serial.println(vel);   // imprime na serial do PC para conferencia
+       analogWrite(motor,vel); // aciona o motor
+    delay(100);                // descanço da vitória
+ }
+}   
